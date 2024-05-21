@@ -1,0 +1,10 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: spark-k8s-sub
+spec:
+  channel: stable
+  name: spark-k8s-operator
+  source: kds-catalog
+  sourceNamespace: olm
+  installPlanApproval: Automatic # or Automatic
