@@ -1,0 +1,78 @@
+apiVersion: hdfs.zncdata.dev/v1alpha1
+kind: HdfsCluster
+metadata:
+  labels:
+    app.kubernetes.io/name: hdfscluster
+    app.kubernetes.io/instance: hdfscluster-sample
+    app.kubernetes.io/part-of: hdfs-operator
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: hdfs-operator
+  name: hdfscluster-sample
+spec:
+  image:
+    repository: docker.stackable.tech/stackable/hadoop
+    tag: 3.3.4-stackable24.3.0
+  clusterConfig:
+    zookeeperDiscoveryZNode: sample-hdfs
+  nameNode:
+    roleGroups:
+      default:
+        replicas: 2
+        config:
+          resources:
+            cpu:
+              min: 1
+              max: 2
+            memory:
+              limit: "3Gi"
+          logging:
+            namenode:
+              loggers:
+                test:
+                  level: DEBUG
+              console:
+                level: WARN
+              file:
+                level: ERROR
+            formatNameNode:
+              loggers:
+                test-format:
+                  level: DEBUG
+  journalNode:
+    roleGroups:
+      default:
+        replicas: 3
+        config:
+          resources:
+            cpu:
+              min: 1
+              max: 2
+            memory:
+              limit: "3Gi"
+          logging:
+            journalNode:
+              loggers:
+                test:
+                  level: DEBUG
+              console:
+                level: WARN
+              file:
+                level: ERROR
+  dataNode:
+    roleGroups:
+      default:
+        replicas: 3
+        config:
+          resources:
+            cpu:
+              min: 1
+              max: 2
+            memory:
+              limit: "3Gi"
+          logging:
+            datanode:
+              loggers:
+                test:
+                  level: DEBUG
+              console:
+                level: WARN
