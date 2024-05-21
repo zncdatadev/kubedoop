@@ -1,0 +1,38 @@
+apiVersion: kafka.zncdata.dev/v1alpha1
+kind: KafkaCluster
+metadata:
+  labels:
+    app.kubernetes.io/name: kafkacluster
+    app.kubernetes.io/instance: kafkacluster-sample
+    app.kubernetes.io/part-of: kafka-operator
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: kafka-operator
+  name: kafkacluster-sample
+spec:
+  image:
+    repository: docker.io/bitnami/kafka
+  clusterConfig:
+    zookeeperDiscoveryZNode: "sample-kafka-znode"
+  brokers:
+    roleGroups:
+      default:
+        replicas: 2
+        config:
+          resources:
+            cpu:
+              min: 1
+              max: 2
+            memory:
+              limit: "3Gi"
+          logging:
+            broker:
+              loggers:
+                test:
+                  level: DEBUG
+              console:
+                level: WARN
+              file:
+                level: ERROR
+          ssl:
+            enabled: true
+            jksPassword: "123456789"
