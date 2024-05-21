@@ -1,0 +1,95 @@
+apiVersion: dolphinscheduler.zncdata.dev/v1alpha1
+kind: DolphinschedulerCluster
+metadata:
+  labels:
+    app.kubernetes.io/name: dolphinschedulercluster
+    app.kubernetes.io/instance: dolphinschedulercluster-sample
+    app.kubernetes.io/part-of: dolphinscheduler-operator
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: dolphinscheduler-operator
+  name: dolphinschedulercluster-sample
+spec:
+  clusterConfig:
+    zookeeperDiscoveryZNode: "sample-dolphinscheduler-znode"
+    database:
+      reference: database-sample
+    s3Bucket:
+      maxConnect: 10
+      pathStyle_access: true
+      reference: s3bucket-sample
+  master:
+    image:
+      pullPolicy: IfNotPresent
+    roleGroups:
+      default:
+        replicas: 1
+        config:
+          resources:
+            cpu:
+              min: 1
+              max: 2
+            memory:
+              limit: "3Gi"
+  worker:
+    image:
+      pullPolicy: IfNotPresent
+    roleGroups:
+      default:
+        replicas: 1
+        config:
+          resources:
+            cpu:
+              min: 1
+              max: 2
+            memory:
+              limit: "3Gi"
+
+  api:
+    image:
+      pullPolicy: IfNotPresent
+    roleGroups:
+      default:
+        replicas: 1
+        config:
+          resources:
+            cpu:
+              min: 1
+              max: 2
+            memory:
+              limit: "3Gi"
+          logging:
+            logging:
+              loggers:
+                logger1:
+                  level: ERROR
+                logger2:
+                  level: DEBUG
+              console:
+                level: WARN
+              file:
+                level: WARN
+  alerter:
+    image:
+      pullPolicy: IfNotPresent
+    roleGroups:
+      default:
+        replicas: 1
+        config:
+          resources:
+            cpu:
+              min: 1
+              max: 2
+            memory:
+              limit: "3Gi"
+          logging:
+            logging:
+              loggers:
+                logger1:
+                  level: ERROR
+                logger2:
+                  level: DEBUG
+              console:
+                level: WARN
+              file:
+                level: WARN
+
