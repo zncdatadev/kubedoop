@@ -1,0 +1,75 @@
+apiVersion: trino.zncdata.dev/v1alpha1
+kind: TrinoCluster
+metadata:
+  labels:
+    app.kubernetes.io/name: trinocluster
+    app.kubernetes.io/instance: trinocluster-sample
+    app.kubernetes.io/part-of: trino-operator
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: trino-operator
+  name: trinocluster-sample
+spec:
+  image:
+    repository: trinodb/trino
+    tag: "423"
+    pullPolicy: IfNotPresent
+  clusterConfig:
+    service:
+      port: 18080
+      type: ClusterIP
+    ingress:
+      enabled: false
+      annotations:
+        kubernetes.io/ingress.class: traefik
+        nginx.ingress.kubernetes.io/rewrite-target: /
+      host: trino.example.com
+    clusterMode: true
+  coordinator:
+    config:
+      nodeProperties:
+        environment: "production"
+        dataDir: /data/trino
+        pluginDir: /usr/lib/trino/plugin
+      configProperties:
+        queryMaxMemory: "4GB"
+        path: /etc/trino
+        https:
+          enabled: false
+      exchangeManager:
+        name: "filesystem"
+      jvmProperties:
+        maxHeapSize: "4G"
+        gcMethodType: "UseG1GC"
+        gcHeapRegionSize: "32M"
+    roleGroups:
+      default:
+        replicas: 1
+        config:
+          resources:
+            cpu:
+              min: "1"
+              max: "1.5"
+            memory:
+              limit: 1Gi
+          nodeSelector:
+            app: default-coordinator
+  worker:
+    config:
+      nodeProperties:
+        environment: "production"
+        dataDir: /data/trino
+        pluginDir: /usr/lib/trino/plugin
+      jvmProperties:
+        maxHeapSize: "8G"
+        gcMethodType: "UseG1GC"
+        gcHeapRegionSize: "32M"
+      configProperties:
+        memoryHeapHeadroomPerNode: ""
+        queryMaxMemoryPerNode: "1GB"
+    roleGroups:
+      default:
+        replicas: 1
+        config:
+          nodeSelector:
+            app: default-worker
+
