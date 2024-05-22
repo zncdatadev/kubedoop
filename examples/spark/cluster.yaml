@@ -1,0 +1,58 @@
+apiVersion: spark.zncdata.dev/v1alpha1
+kind: SparkHistoryServer
+metadata:
+  labels:
+    app.kubernetes.io/name: sparkhistoryserver
+    app.kubernetes.io/instance: sparkhistoryserver
+    app.kubernetes.io/part-of: spark-k8s
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: spark-k8s-operator
+  name: sparkhistoryserver-sample
+spec:
+  image:
+    repository: bitnami/spark
+    tag: 3.1.1
+    pullPolicy: IfNotPresent
+  clusterOperation:
+    stopped: false
+  clusterConfig:
+    # listenerClass: external-unstable
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        nginx.ingress.kubernetes.io/rewrite-target: /
+      host: spark-history.example.com
+  sparkHistory:
+    config:
+      resources:
+        cpu:
+          min: 100m
+          max: 200m
+        memory:
+          limit: 512Mi
+      eventLog:
+        enabled: true
+        mountMode: pvc
+        dir: /tmp
+    roleGroups:
+      default:
+        replicas: 1
+        podOverride:
+          metadata:
+            labels:
+              foo: bar
+        config:
+          gracefulShutdownTimeout: 10s
+          logging:
+            sparkHistory:
+              console:
+                level: "INFO"
+          resources:
+            cpu:
+              min: 300m
+              max: 400m
+            memory:
+              limit: 612Mi
+          nodeSelector:
+            app: default

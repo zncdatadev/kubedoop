@@ -1,0 +1,70 @@
+apiVersion: zncdata.dev/v1alpha1
+kind: Database
+metadata:
+  labels:
+    app.kubernetes.io/name: database
+    app.kubernetes.io/instance: database-sample
+    app.kubernetes.io/part-of: commons-operator
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: commons-operator
+  name: database-sample
+spec:
+  databaseName: znc_prod
+  reference: databaseconnection-sample
+  credential:
+    existingSecret: database-sample-pg-user-1
+---
+apiVersion: zncdata.dev/v1alpha1
+kind: DatabaseConnection
+metadata:
+  labels:
+    app.kubernetes.io/name: databaseconnection
+    app.kubernetes.io/instance: databaseconnection-sample
+    app.kubernetes.io/part-of: commons-operator
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: commons-operator
+  name: databaseconnection-sample
+spec:
+  provider:
+    postgres:
+      driver: org.postgresql.Driver
+      host: postgresql
+      port: 5432
+      ssl: false
+      credential:
+        existingSecret: databaseconnect-sample-pg-root-1
+---
+apiVersion: zncdata.dev/v1alpha1
+kind: S3Bucket
+metadata:
+  labels:
+    app.kubernetes.io/name: s3bucket
+    app.kubernetes.io/instance: s3bucket-sample
+    app.kubernetes.io/part-of: commons-operator
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: commons-operator
+  name: s3bucket-sample
+spec:
+  bucketName: znc-warehouse
+  reference: s3connection-sample
+  credential:
+    existSecret: s3bucket-sample-user-1
+---
+apiVersion: zncdata.dev/v1alpha1
+kind: S3Connection
+metadata:
+  labels:
+    app.kubernetes.io/name: s3connection
+    app.kubernetes.io/instance: s3connection-sample
+    app.kubernetes.io/part-of: commons-operator
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: commons-operator
+  name: s3connection-sample
+spec:
+  endpoint: http://minio:9000
+  region: us-east-1
+  ssl: false
+  pathStyle: true
+  credential:
+    existSecret: s3connection-sample-root-1
+
