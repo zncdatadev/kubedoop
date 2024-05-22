@@ -1,5 +1,5 @@
 name: "\U0001F41E Bug report"
-title: "[BUG]..."
+title: "[Bug]: "
 description: Report a bug
 labels: ["bug"]
 body:
@@ -38,7 +38,7 @@ body:
     id: screenshot
     attributes:
       label: Screenshot
-      description: If relevant, please include screenshot(s) of your Gradio app so that we can understand what the issue is.
+      description: If relevant, please include screenshot(s) of your app so that we can understand what the issue is.
   - type: textarea
     id: logs
     attributes:
@@ -60,7 +60,7 @@ body:
       description: Select the severity of this issue
       options:
         - I can work around it
-        - Blocking usage of gradio
+        - Blocking usage of operator
     validations:
       required: true
   - type: markdown
