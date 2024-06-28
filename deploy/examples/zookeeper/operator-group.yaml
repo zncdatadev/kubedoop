@@ -1,10 +1,8 @@
-apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
+apiVersion: operators.coreos.com/v1
 metadata:
-  name: zncdata-stack
-  namespace: kubedatastack-operators
+  name: kubedata-operators
+  namespace: kubedatastack
 spec:
-  # if not specified, the operator group will target all namespaces
-  # so the operator will be able to watch and manage resources in all namespaces
   targetNamespaces:
   - kubedatastack

@@ -1,10 +1,11 @@
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
-  name: spark-k8s-sub
+  name: spark-k8s-operator
+  namespace: kubedatastack
 spec:
   channel: stable
   name: spark-k8s-operator
-  source: kds-catalog
+  source: kubedata-catalog
   sourceNamespace: olm
-  installPlanApproval: Automatic # or Automatic
+  installPlanApproval: Automated
