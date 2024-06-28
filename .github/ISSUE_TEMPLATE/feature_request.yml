@@ -8,13 +8,14 @@ body:
       value: |
         First, check out our [Collaboration Guide](https://zncdata.dev/docs/developer-manual/collaboration)
         Please provide a searchable summary of the issue in the title above ⬆️.
-  - type: checkboxes
+  - type: dropdown
     attributes:
       label: Duplicates
       description: Please [search the history](https://github.com/zncdatadev/kubedatastack/issues) to see if an issue already exists for the same problem.
       options:
-        - label: I have searched the existing issues
-          required: true
+        - no check
+        - I have searched the existing issues
+      default: 0
   - type: textarea
     attributes:
       label: Summary 💡
