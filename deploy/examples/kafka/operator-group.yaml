@@ -1,8 +1,8 @@
 kind: OperatorGroup
 apiVersion: operators.coreos.com/v1
 metadata:
-  name: kubedatastack
-  namespace: kubedatastack-operators
+  name: kubedata-operators
+  namespace: kubedatastack
 spec:
   targetNamespaces:
   - kubedatastack
