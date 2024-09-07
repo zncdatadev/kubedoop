@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this bug report! Before you get started, please [search to see](https://github.com/zncdatadev/kubedatastack/issues) if an issue already exists for the bug you encountered
+        Thanks for taking the time to fill out this bug report! Before you get started, please [search to see](https://github.com/zncdatadev/kubedoop/issues) if an issue already exists for the bug you encountered
   - type: textarea
     id: bug-description
     attributes:
@@ -15,13 +15,14 @@ body:
       placeholder: Bug description
     validations:
       required: true
-  - type: checkboxes
+  - type: dropdown
     attributes:
       label: Have you searched existing issues?  🔎
       description: Please search to see if an issue already exists for the issue you encountered.
       options:
-        - label: I have searched and found no existing issues
-          required: true
+        - no check
+        - I have searched and found no existing issues
+      default: 0
   - type: textarea
     id: reproduction
     attributes:
