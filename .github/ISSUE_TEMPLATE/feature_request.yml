@@ -11,7 +11,7 @@ body:
   - type: dropdown
     attributes:
       label: Duplicates
-      description: Please [search the history](https://github.com/zncdatadev/kubedatastack/issues) to see if an issue already exists for the same problem.
+      description: Please [search the history](https://github.com/zncdatadev/kubedoop/issues) to see if an issue already exists for the same problem.
       options:
         - no check
         - I have searched the existing issues

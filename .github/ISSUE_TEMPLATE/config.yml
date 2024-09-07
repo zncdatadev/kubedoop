@@ -1,5 +1,5 @@
-blank_issues_enabled: false
+blank_issues_enabled: true
 contact_links:
-  - name: 💡 KubeDataStack Documentation
+  - name: 💡 Kubedoop Documentation
     url: https://zncdata.dev/docs/
-    about: All about the KubeDataStack project
+    about: All about the Kubedoop project
